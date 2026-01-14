@@ -95,6 +95,46 @@ public class adding{
             }
         }
     }
+    public static int levelordersum ( Node root , int k )
+    {
+        if(root==null)
+        {
+            return 0;
+        }
+        int sum=0;
+        int level=0;
+        Queue<Node> q = new LinkedList<>();
+        q.add(root);
+        q.add(null);
+
+        while(!q.isEmpty())
+        {
+            if(level>k)
+            {
+                return sum;
+            }
+            Node currnode = q.remove();
+            if(currnode==null){
+                level++;
+                if (q.isEmpty())
+                {
+                    return sum;
+                }else {
+                    q.add(null);
+                }
+            }else {
+                if(k==level)
+                {
+                    sum = currnode.data+sum;}
+                    if (currnode.Left != null)
+                        q.add(currnode.Left);
+                    if (currnode.Right != null)
+                        q.add(currnode.Right);
+
+            }
+        }
+        return sum;
+    }
     public static int countNode(Node root)
     {
         if(root==null)
@@ -192,5 +232,7 @@ public class adding{
         System.out.println("The diameter: ");
         System.out.println(diameter(root));
         System.out.println(diameter2(root).dia);
+        System.out.println("The sum of Node of 3rd level");
+        System.out.println(levelordersum(root,3-1));
     }
 }
