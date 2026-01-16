@@ -1,5 +1,7 @@
 package BinaryStree;
 
+import java.util.ArrayList;
+
 class binarystree{
     static class Node{
         int data;
@@ -92,6 +94,44 @@ class binarystree{
         }
         return root;
     }
+    public static void range(Node root , int str , int end)
+    {
+        if(root == null)
+        {
+            return;
+        }
+
+        if(root.data > str)
+        {
+            range(root.left, str, end);
+        }
+
+        if(root.data >= str && root.data <= end)
+        {
+            System.out.print(root.data + " ");
+        }
+
+        if(root.data < end)
+        {
+            range(root.right, str, end);
+        }
+    }
+    public static void path (Node root , ArrayList<Integer> array)
+    {
+       if(root==null)
+       {
+           return;
+       }
+       array.add(root.data);
+       if(root.left==null && root.right==null){
+           System.out.println(array);
+       }else{
+
+           path(root.left,array);
+           path(root.right,array);
+       }
+       array.remove(array.size()-1);
+    }
     public static void main(String[] args) {
         int value[] ={5,1,3,4,2,7};
         Node root=null;
@@ -103,5 +143,11 @@ class binarystree{
         search( root , 100 );
         delete(root,4);
         display(root);
+        System.out.println();
+        System.out.println("The range from 2 to 4");
+        range(root,2,7);
+        System.out.println();
+        ArrayList<Integer> a = new ArrayList<>();
+        path(root,a);
     }
 }
